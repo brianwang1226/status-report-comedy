@@ -2,7 +2,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 const line =
-  "Weekly status: I read your 400-page brief, understood 12% of it, and confidently delivered the other 88% anyway. You're welcome.";
+  "Weekly status: I read your 400-page brief, understood 12% of it, and confidently delivered the other 88% anyway. You're welcome. Please hold all questions until next week.";
 
 // The gate allows 1-200 characters; refuse to write an over-long text.
 if (line.length < 1 || line.length > 200) {
