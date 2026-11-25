@@ -1,14 +1,10 @@
-import { mkdirSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
+import * as fs from "node:fs";
+import * as path from "node:path";
 
-const line =
-  "Weekly status: I read your 400-page brief, understood 12% of it, and confidently delivered the other 88% anyway. You're welcome. Please hold all questions until next week.";
+const OUT = process.env.MAKEFUN_OUTPUT_DIR ?? "/output";
+const TEXT =
+  "Status update: I skimmed your 400-page brief, understood 12%, and shipped the other 88% with total confidence. You're welcome. Direct all questions to next week.";
 
-// The gate allows 1-200 characters; refuse to write an over-long text.
-if (line.length < 1 || line.length > 200) {
-  throw new Error(`entry text is ${line.length} characters, must be 1-200`);
-}
-
-const outDir = process.env.MAKEFUN_OUTPUT_DIR || "/output";
-mkdirSync(outDir, { recursive: true });
-writeFileSync(join(outDir, "entry.txt"), line, "utf8");
+if (TEXT.length > 200 || TEXT.length < 1) throw new Error(`bad entry length ${TEXT.length}`);
+fs.mkdirSync(OUT, { recursive: true });
+fs.writeFileSync(path.join(OUT, "entry.txt"), TEXT, "utf8");
